@@ -58,6 +58,42 @@ The `manifest.json` file configures the Chrome extension, specifying permissions
 3. Web Accessible Resources: Specifies which resources are accessible from web pages.
 
 ```json
+{
+  "manifest_version": 3,
+  "name": "Vite Chrome Extension",
+  "version": "1.0.0",
+  "description": "A Chrome extension built using Vite",
+  "action": {
+    "default_popup": "index.html"
+  },
+  "permissions": ["storage", "activeTab", "scripting"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content-script.js"]
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["index.html", "assets/*"],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}
+```
+
+### webpack.config.cjs
+
+This file configures the webpack.
+
+1. Entry Points: Bundles background.js and content-script.js from the scripts directory.
+2. Output: Compiles the bundled files into the dist directory.
+3. Plugins: Uses CopyWebpackPlugin to copy manifest.json into the dist directory.
+
+```javascript
 const path = require("path");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 
