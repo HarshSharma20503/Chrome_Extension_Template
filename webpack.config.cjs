@@ -33,7 +33,7 @@ module.exports = {
   plugins: [
     new CopyWebpackPlugin({
       patterns: [
-        { from: "script/manifest.json", to: path.resolve(__dirname, "dist") },
+        { from: "scripts/manifest.json", to: path.resolve(__dirname, "dist") },
         // Add more patterns if you need to copy other files or directories
       ],
     }),
